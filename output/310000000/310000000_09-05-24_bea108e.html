@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Google Maps - gmplot</title>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyCbL_W8yie7RKhlJXJJQT2LiI6jO0rReYU"></script>
+<script type="text/javascript">
+    function initialize() {
+        var map = new google.maps.Map(document.getElementById("map_canvas"), {
+            zoom: 15,
+            center: new google.maps.LatLng(44.803155, -93.355933)
+        });
+
+        var marker_icon_FF0000 = {
+            url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAiCAYAAACwaJKDAAAABmJLR0QA/wD/AP+gvaeTAAACBklEQVRIia3VzUtUURgH4GdG/AiyZZShtWgXUbSIFtGqRYtqWRLhXyBYf0K6MaJQ2gRtayHtijYpleHKSCgIcRHoIiOSKEzLKea0OOeqTfPlzPzg5Qwz9zz3nXPvPTeneo7gNA4gjyI+Ygbva8z9L2cxi9BHOE+4msY+gliz6biayWE0R7GfMEcoEkJJzRH6CbnY+WiaVxEc6yY8KQOVq8eE7tj1WCV4qIswUyeY1QyhK8JDpWAP1m7vEMzqTkTXkrOZkYOEQoNogXAowiPE2wQuDqC9nktZJu0YSE72XRs2phrsMqup2OkG2vLpRB19DXaZJc3vQHv294Um0e3z8yigsNQkmuYXUMie5/npJtE0fz55YLiXsNHELdUbV2B4+4n2Y/Vmg+itCK4m558MdhBe7hCcJnRGdLDS0ox3E17XCb4h7IngeLX1zuFhD2G5BriytY4Tqmx9WXbh3Tnl99KsLkdwAbtrgVmO4/eDCuCkzd3/TL1glru9hF8lYJFwMoKPdgrCXqzfL0GfR7CIo42gcO9YCXopolONgnAC4W0Cv9l8dVxpBoWFGwmdiOC6Glc8X+3HlKeT6cOzOLzAjyaaBBc602ZzOHZ6vVkQ9kl7Qi6ip1qBwpdrEfwjPnFVU8+awuKrOC7hZ6vQlQ9baM3Ui379HsfVVqKf07jcSvRTGhfrOfgvIP3ECS77BDoAAAAASUVORK5CYII=",
+            labelOrigin: new google.maps.Point(10, 11)
+        };
+
+        var info_marker_0 = new google.maps.Marker({
+            position: new google.maps.LatLng(44.803155, -93.355933),
+            title: "Marker #1",
+            icon: marker_icon_FF0000,
+            map: map
+        });
+
+        var info_window_0 = new google.maps.InfoWindow({
+            content: '<h3>Packet 14, Reason 0</h3><tt>PacketID                 : 14 (0xe)<br />OBDBackoff               : 0 (0x0)<br />ReasonCode               : 0 (0x0)<br />SequenceNumber           : 1 (0x1)<br />DSN                      : 310000000 (0x127a3980)<br />UnixTime                 : 17:45:05 EDT 09/05/2024 (1725572705)<br />Latitude                 : 44803155<br />Longitude                : -93355933<br />GPSSpeed                 : 0 (0x0)<br />Heading                  : 0<br />InputStates              : 0b1011110<br />OutputStates             : 0b0<br />NumSats                  : 9 (0x9)<br />HDOP                     : 16 (0x10)<br />VehBattVolt              : 120 (0x78)<br />IntBattVolt              : 7 (0x7)<br />GPSTripOdom              : 6666 (0x1a0a)<br />Flags                    : 0b0<br />UserVar32[6]             : 0<br />UserVar32[7]             : 0<br />EVChargeState            : 0b0<br />HybBattRemain            : 255 (0xff)<br />EVBatt_V                 : 65535 (0xffff)<br />EVBatt_A                 : -1<br />OBDTrueOdom              : 0 (0x0)<br />OBDTotFuelUs             : 4294967295 (0xffffffff)<br />ECUEngineSec             : 4294967295 (0xffffffff)<br />OBDVehSpeed              : 0 (0x0)<br />OBDEngRPM                : 0 (0x0)<br />OBDCoolTemp              : -1<br />OBDFuelLvl%              : 0 (0x0)<br />OBDTotCrsSec             : 4294967295 (0xffffffff)<br />OBDTotIdlSec             : 4294967295 (0xffffffff)<br />OBDTotIdlFul             : 4294967295 (0xffffffff)<br />SystemStates             : 0b1010001110001000111<br />OBDProtocols             : 0b0<br />OBDTripOdom              : 0 (0x0)<br />OBDLifeOdom              : 0 (0x0)<br />DerivedEngSec            : 0 (0x0)<br /></tt>'
+        });
+        
+        info_marker_0.addListener('click', function() {
+            info_window_0.open(map, info_marker_0);
+        });
+
+    }
+</script>
+</head>
+<body style="margin:0px; padding:0px;" onload="initialize()">
+    <div id="map_canvas" style="width: 100%; height: 100%;" />
+</body>
+</html>

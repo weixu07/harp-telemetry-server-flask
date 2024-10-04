@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css" integrity="sha512-xiunq9hpKsIcz42zt0o2vCo34xV0j6Ny8hgEylN3XBglZDtTZ2nwnqF/Z/TTCc18sGdvCjbFInNd++6q3J0N6g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <h1>UDP Ports</h1>
+    <a href="/harp/">Back to Main Page</a>
+    <table>
+        <thead><tr><th>Port #</th><th>Paramset</th><th>New Paramset</th><th>Action</th></tr></thead>
+        <tbody>
+            {% for port, paramconfig, params in udps %}
+            <tr>
+            <td><a>{{port}}</a></td>
+            <td><a>{{paramconfig}}</a></td>
+            <td><select name="newparam" id="newparamSelector{{port}}">
+                {% for param in params %}
+                <option value="{{param}}">{{param}}</option>
+                {% endfor %}
+            </select></td>
+            <td><button class="button" id="RunParamset{{port}}">Reset</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+<script>
+    var portArray = []
+    portArray = {{ port_Array }}
+    portArray.forEach(port => {
+        let param_selector = document.getElementById(`newparamSelector${port}`)
+        let param_run = document.getElementById(`RunParamset${port}`)
+        param_run.addEventListener('click', () => run_param(port, param_selector.value));
+    })
+    
+    function run_param(port, paramset) {
+        var param = {
+            'port': port,
+            'paramset': paramset
+        }
+
+        var running_elem = document.createElement('p');
+        running_elem.innerText = `Running ${paramset} at ${port}`;
+        document.body.appendChild(running_elem);
+
+        run_paramset(param).then(status => {
+            if (status == 200) {
+                running_elem.innerText = 'Run Success!';
+                setTimeout(() => {location.reload() }, 5000)
+            } else {
+                running_elem.innerText = `Run Fail (${status})`;
+            }
+            setTimeout(() => { running_elem.remove() }, 1000);
+        })
+    }
+
+    async function run_paramset(param_object) {
+        const response = await fetch(`/udp_ports/new_paramset`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(param_object)
+        });
+
+        return response.status
+    }
+</script>
+
+{% endblock %}

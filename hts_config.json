@@ -1,0 +1,27 @@
+{
+    "UDP_addr": "",
+    "UDP_objs": [
+        {
+            "port": 3001,
+            "paramset": "SIT_paramset_sanket.txt"
+        },
+        {
+            "port": 3002,
+            "paramset": "VZC_Paramset_Sensata_Debug_with_beacons.txt"
+        },
+        {
+            "port": 3003,
+            "paramset": "VZC_SMG_V1.2.txt"
+        },
+        {
+            "port": 3004,
+            "paramset": "VZC_SMG_V1.2.txt"
+        },
+        {
+            "port": 3005,
+            "paramset": "VZC_SMG_V1.2.txt"
+        }
+    ],
+    "cert": "",
+    "key": ""
+}

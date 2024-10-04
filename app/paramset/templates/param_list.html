@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css" integrity="sha512-xiunq9hpKsIcz42zt0o2vCo34xV0j6Ny8hgEylN3XBglZDtTZ2nwnqF/Z/TTCc18sGdvCjbFInNd++6q3J0N6g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <h1>Paramset List</h1>
+    <a href="/harp/">Back to Main page</a>
+    <label>Upload paramset file</label>
+    <form action = "/params/upload/" method = "post" enctype="multipart/form-data">
+        <input type="file" name="ParamsetInput" accept=".txt" />
+        <input type="submit" value="Upload">
+    </form>
+    <table>
+        <thead><tr><th>Paramset</th><th>TXT Link</th><th>Port</th></tr></thead>
+        <tbody>
+            {% for param, portstr in params %}
+            <tr>
+                <td><a href="/params/{{param}}">{{param}}</a></td>
+                <td><a href="/params/download/{{param}}">Download TXT</a></td>
+                <td>{{portstr}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}

@@ -1,0 +1,415 @@
+#Paramset V1
+
+#Revision
+# Sequential order of packet Types
+# updated PCR to remove Depreciated ECM codes
+# Set GCV[1] to match :14 (ast)
+# Adjust :14 (ast) to use 0.1V hystoresis
+# Fix ELD BT UUID Definitions
+
+# Report Destination
+#!cs:3,0,xirgo.us.smb.vzc-iot.com,3004,5,3,0
+#US-Test:        https://urldefense.com/v3/__http://xirgo.test.us.smb.vzc-iot.com__;!!A16HtNeG!bTVNjZg-vJqRFoq4eb4Ktu3CtxQbRp3B8ziTtpi2DjKKbnLRDwI2JUPwyEqcUXj6a8h2DV529l8MbkM4_I8Uk5Pxlc0$ 
+#US-Staging:     https://urldefense.com/v3/__http://xirgo.stage.us.smb.vzc-iot.com__;!!A16HtNeG!bTVNjZg-vJqRFoq4eb4Ktu3CtxQbRp3B8ziTtpi2DjKKbnLRDwI2JUPwyEqcUXj6a8h2DV529l8MbkM4_I8U4PVIYyc$ 
+#US-Production:  https://urldefense.com/v3/__http://xirgo.us.smb.vzc-iot.com__;!!A16HtNeG!bTVNjZg-vJqRFoq4eb4Ktu3CtxQbRp3B8ziTtpi2DjKKbnLRDwI2JUPwyEqcUXj6a8h2DV529l8MbkM4_I8U9Rvca8k$ 
+#EU-Production:  https://urldefense.com/v3/__http://xirgo.eu.smb.vzc-iot.com__;!!A16HtNeG!bTVNjZg-vJqRFoq4eb4Ktu3CtxQbRp3B8ziTtpi2DjKKbnLRDwI2JUPwyEqcUXj6a8h2DV529l8MbkM4_I8Uli-mfyc$ 
+#DM Prod
+#!cs:3,4,172.25.41.6,3110,5,3,0
+#DM-Dev
+#!cs:3,4,172.25.42.200,3110,5,3,0
+
+# SENATA TELEMTRY AND DM
+!cs:3,0,fw.xirgotech.com,7255,5,3,0
+!cs:3,4,20.62.251.213,3100,0,0,0
+
+#PID Server
+!cs:46,1,52.35.71.99,3111,0
+#PID Auto Registration
+!mcs:41,2937B6257E974746B84ABBBD28CFD7E7
+
+#PKT type 0 - Std GPS only Plot
+!cs:95,0,0,20,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,466,5c0,467
+#PKT type 1 - Acceleration
+!cs:95,1,1,32,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,466,5c0,5ab,57a,5dc,5d8,5d9,57b,5a9,5dd,5da,5db,57c,5aa,467
+#PKT Type 2 - Garmin
+!cs:95,2,2,7,578,ee,579,5a8,73,32,105   
+#PKT Type 8 - STD GPS + ECM - 2023_UniversalScript use, ECM 
+!cs:95,3,8,38,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,5c0,466,467,e7,1024,1025,1026,78,1012,f7,07,1f,1004,70,1013,1008,1016,5de,f0,fa,2d
+#PKT Type 9 - GPS + ECM + VIN   #2023_UniversalScript use, ECM+VIN 
+!cs:95,4,9,39,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,5c0,466,467,e7,1024,1025,1026,78,1012,f7,07,1f,1004,70,1013,1008,1016,5de,f0,fa,2d,19
+#PKT Type 11 (1191FW) GPS+ ECM+ DTCs
+!cs:95,5,11,39,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,5c0,466,467,e7,1024,1025,1026,78,1012,f7,07,1f,1004,70,1013,1008,1016,5de,f0,fa,2d,c2
+#pcr 12 - SMOG Debug
+!cs:95,6,12,21,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,5c0,110,5df,10f
+
+#PKT Type 14 - STD GPS + ECM - 2023_UniversalScript use, ECM 
+!cs:95,7,14,39,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,5c0,466,467,e7,1024,1025,1026,78,1012,1006,07,1f,1004,70,1013,1008,1016,5de,f0,fa,2d,6d
+#PKT Type 15 - GPS + ECM + VIN   #2023_UniversalScript use, ECM+VIN 
+!cs:95,8,15,40,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,5c0,466,467,e7,1024,1025,1026,78,1012,1006,07,1f,1004,70,1013,1008,1016,5de,f0,fa,2d,6d,19
+#PKT Type 16 (1191FW) GPS+ ECM+ DTCs
+!cs:95,9,16,40,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,5c0,466,467,e7,1024,1025,1026,78,1012,1006,07,1f,1004,70,1013,1008,1016,5de,f0,fa,2d,6d,c2
+
+
+# SENSATA DEBUG PACKETS - covers all documented PCR IDs on 1191
+# Each packet contains packet ID, sequence number, DSN, latitutde, and longitude
+!cs:95,10,100,46,578,579,5a8,73,04,05,32,04,05,06,09,08,560,e5,76,102,eb,5c0,0b,0a,0d,a7,a9,0c,0e,5dc,5d8,5d9,57b,5a9,5ab,57a,5dd,5da,5db,57c,5aa,105,e2,e3,fa,2d,bb,10a,400,401
+!cs:95,11,101,46,578,579,5a8,73,04,05,402,403,404,405,406,407,408,409,40a,40b,40c,40d,40e,40f,440,441,442,443,444,445,446,447,460,461,462,463,464,465,466,467,5de,6e,78,1012,f7,7,1f,1004,70,1015
+!cs:95,12,102,46,578,579,5a8,73,04,05,1013,1008,1016,f9,108,109,f8,33,19,aa,27,c2,ee,f0,1007,1014,14,1096,1098,1099,109a,109b,1017,101d,100f,1009,f,100b,100a,100c,1019,101a,101b,100e,100d,101c,4c0,4c1,4c2,4c3
+!cs:95,13,103,46,578,579,5a8,73,04,05,4c4,109c,109d,109e,109f,10a1,34,36,29,10a2,10a3,1017,1010,10a0,410,411,412,413,414,415,416,417,418,419,41a,41b,41c,41d,41e,41f,448,449,44a,44b,44c,44d,44e,44f,468,469
+!cs:95,14,104,45,578,579,5a8,73,04,05,46a,46b,46c,46d,46e,46f,10a1,105,ed,ec,21,bf,74,6d,1006,e4,fc,fd,a6,cc,f4,25,f5,26,1024,e7,1025,1026,1022,1023,103,104,1027,1028,1029,102a,10f,110,5df
+
+# BEACONING
+# PKT Type 17 first up to 50 beacons
+!cs:95,15,17,19,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,c3,5f0
+# PKT Type 18 next up to 50 beacons
+!cs:95,16,18,19,578,ee,579,5a8,73,32,04,05,08,09,560,e5,0a,0b,0c,a9,eb,c3,5f1
+
+#Timers
+#Towing, Panic w/ Ign 
+!cs:65,0,30,1
+!cs:65,1,15,0
+#Non-Movement (Idle)
+!cs:65,2,30,0
+!cs:65,3,30,0
+#Movement Plot Frequeny
+!cs:65,4,30,0   
+!cs:65,5,300,0
+#First Stop
+!cs:65,6,59,0   
+#Second Stop
+!cs:65,7,88,0  
+#No DRID Grace Period 
+!cs:65,8,2,0  
+!cs:65,9,3,1
+!cs:65,10,345600,0
+!cs:65,11,25,0
+!cs:65,12,10,0
+#DRID Buzzer Timeout
+!cs:65,13,0,0
+!cs:65,14,40,0
+!cs:65,15,900,0
+!cs:65,16,5,0
+!cs:65,17,10,0
+!cs:65,18,300,1  # periodic beacon scan every 5 mins (proposal is 30 mins, but setting to 5 for testing
+!cs:65,19,3600,0   
+!cs:65,20,30,0   # scanning window
+!cs:65,21,60,0  
+#SMOG Timeout  
+!cs:65,22,300,0     
+!cs:65,23,30,0   #Imact Cooldown 
+#EV charge check
+!cs:65,24,20,0 
+#Sleep Timer  
+!cs:65,25,60,0  
+!cs:65,26,600,1 
+#Duration of wake from sleep.
+!cs:65,27,540,0 
+#Sleep time from ign off
+!cs:65,28,7200,0    
+!cs:65,29,900,0
+# SENSATA DEBUG TIMER
+!cs:65,30,10,0
+!cs:65,31,21600,1
+
+
+# Beaconing
+!cs:79,3,0,0,5      # eddystone callback type, no rssi min, no expire, update xor list every 5 seconds
+
+# Input Setup 
+#:wycfg idp[0] 1
+!cs:71,0,0x0060,0,0
+#:wycfg idp[1] 0
+!cs:71,1,0x0020,0,0
+#:wycfg idp[2] 0
+!cs:71,2,0x0020,0,0
+#:wycfg idp[3] 0
+!cs:71,3,0x0020,0,0
+
+#:wycfg mst 100
+!cs:29,1,0,75,100,100
+
+# Acceleration Theresholds 
+
+#:wycfg aet[0] 0 1000 1000 200  #Accel
+!cs:63,0,1,200,1000,1000,2
+#:wycfg aet[1] 1 1000 1000 210  #Decel
+!cs:63,1,1,210,1000,1000,3
+#:wycfg aet[2] 2 2000 1000 400  #Left Corner
+!cs:63,2,1,400,2000,1000,1
+#:wycfg aet[3] 3 2000 1000 400  #Right Corner
+!cs:63,3,1,400,2000,1000,0
+#:wycfg aet[4] 0 100 100 700  #Rear Crash
+!cs:63,4,1,700,100,100,2
+#:wycfg aet[5] 1 100 100 700  #Forward Crash
+!cs:63,5,1,700,100,100,3
+#:wycfg aet[6] 2 100 100 700  #Right Crash
+!cs:63,6,1,700,100,100,1
+#:wycfg aet[7] 3 100 100 700  #Left Crash
+!cs:63,7,1,700,100,100,0
+#FIR Setting
+!cs:93:31,31629,31754,31870,31978,32078,32170,32252,32327,32392,32449,32498,32537,32568,32590,32603,32608,32603,32590,32568,32537,32498,32449,32392,32327,32252,32170,32078,31978,31870,31754,31629
+#apc/arc
+!cs:108,75,75,0,0
+
+#General Config Constants 
+
+#:wycfg gcv[0] 0x17120  #bits enabled 0111 0001 0010 0000 (SMG, PTO4,PTO3,PTO2,Tow,DrId) 
+!cs:64,0,94496
+#:wycfg gcv[1] 133 #Cutoff Threshold 13.1V
+!cs:64,1,135
+#:wycfg gcv[2] 0 #V_batt counter
+!cs:64,2,0
+# Alternator off margin in 0.1V
+!cs:64,3,2
+#:wycfg gcv[8] 223 #was 95 deep sleep mask all inputs,vibration added delta voltage ***** removed
+!cs:64,8,223
+#:wycfg gcv[9] 255 #was 127 periodic sleep mask all inputs, vibration, timeout added delta voltage
+!cs:64,9,255  
+#:wycfg gcv[10] 60 #Time dealy from ICE off to allow charging to detect - possible delay in BSC updates
+!cs:64,10,60
+#:wycfg gcv[11] 180 #Periodic Or Daily Plot (Minutes) (wake from sleep time)
+
+!cs:64,11,180
+#:wycfg gcv[15] 121 # High Speed, In Cab Alert (Kph)
+!cs:64,15,121
+#:wycfg gcv[16] 30 # Minutes to stay asleep while charging/alt on
+!cs:64,16,30
+
+# SENSATA DEBUG - BLANK APNs
+#:wycfg apn[0] "10230.mcs", "", ""
+#!cs:1,0,10230.mcs,0
+#:wycfg apn[1] "https://urldefense.com/v3/__http://c1.korem2m.com__;!!A16HtNeG!bTVNjZg-vJqRFoq4eb4Ktu3CtxQbRp3B8ziTtpi2DjKKbnLRDwI2JUPwyEqcUXj6a8h2DV529l8MbkM4_I8Uagke_UY$ ", "", ""
+#!cs:1,1,c1.korem2m.com,0
+#:wycfg apn[2] "https://urldefense.com/v3/__http://apn.fleetmatics.com__;!!A16HtNeG!bTVNjZg-vJqRFoq4eb4Ktu3CtxQbRp3B8ziTtpi2DjKKbnLRDwI2JUPwyEqcUXj6a8h2DV529l8MbkM4_I8U3KfaDIY$ ", "fleetmatics", "fleetmatics"
+#!cs:1,2,apn.fleetmatics.com,0
+#!cs:102,2,"fleetmatics","fleetmatics"
+#:wycfg apn[3] "FLEETMTC.GW7.VZWENTP", "", ""
+#!cs:1,3,FLEETMTC.GW7.VZWENTP,0
+  
+## should it be !cs:12,0,1,0  - this ends up as :12,1,0,0 in the device.
+#ECM Ignition
+!cs:12,1,1,0
+#ECM or wired ignition  #32 = virtual ignition PIN (White Wire) 16 = std input repurposed for ignition.
+      
+#:wycfg gps 30 10 # 3mph for gps movement start, 1 mph gps movement to stop
+  
+#Alternator Settings *** Test the various dynamic alternator settings.
+!cs:14,135,3,2,0
+
+#VBUS/BKO  enable: VIN, Big Hammer, all backoff trig,  DTC; Normal OBD SMOG Enabled
+!cs:23,0x800010FD,0x18,0   
+
+#Collect DTC's every 10 min when speed <10KMPH
+!cs:92,1,600,10   
+#:wycfg obd[0] 1
+#:wycfg obd[2] 1 0
+#:wycfg oio[0] 0 # passive mode odometer settings
+#:wycfg oio[1] 1
+#:wycfg oio[2] 1  
+#:wycfg ota 1
+!cs:4,1,2,0,60,15,1
+#Prevent updates while ignition on max delay 1440 min (24hours)
+!cs:89,1,1440
+
+# SMS Settings
+!cs:8:,0,0,A9
+
+#BLE Enable
+!cs:77,1,0
+#BLE Advertising INFO
+!cs:87,1,0,5,2,HarpBT%d
+
+#Engine Service Config  ## AAb2 - Mightn not need any longer
+!cs:97,0,1,0,"1b19b844-038f-11e5-8418-1697f925ec7b",17,25,33,27,26,11,2,3,4,5,10,7,8,6,9,28,31,32  
+#Timer Service Config
+!cs:97,1,1,0,"1b19bb5a-038f-11e5-8418-1697f925ec7b",2,29,30
+#HOS Service   --aab3 Fleet service
+!cs:97,2,1,0,"a59611ba-78b7-4fd2-96fb-9b0f66d2311e",24,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
+#ID Service Config
+!cs:97,3,1,0,"decc0000-dc4f-4376-9df9-8de1f845b254",3,34,35,36
+
+#Garmin Serial Port Setup
+!cs:98,2,9600,0,0
+
+#:wycfg cth 120 60
+
+## LED Config
+#GPS
+!cs:68,0,0:3,0,65535,0,0
+!cs:68,0,1:2,0,65535,FFFF0000,0
+!cs:68,0,2:1,0,1,FFFFFFFF,0
+!cs:68,0,3:0,0,0,0,0
+!cs:68,0,4:0,0,0,0,0
+!cs:68,0,5:0,0,0,0,0
+#Blue
+#!cs:68,0,0,16,0,10,00FF00FF,0
+#!cs:68,0,1,10,0,65535,0,0
+#!cs:68,0,2,9,0,1,FFFFFFFF,0
+
+!cs:68,1,0:14,0,65535,0,0
+!cs:68,1,1:13,0,65535,0,0
+!cs:68,1,2:12,0,65535,FFFF0000,0
+!cs:68,1,3:0,0,0,0,0
+!cs:68,1,4:0,0,0,0,0
+!cs:68,1,5:0,0,0,0,0
+
+#Cell/ign
+!cs:68,2,0:7,0,65535,0,0
+!cs:68,2,1:6,0,65535,FFFF0000,0
+!cs:68,2,2:5,0,65535,FFFFFFFF,0
+!cs:68,2,3:17,0,65535,FFFFFFFF,0
+#TRIP Start/stop
+!cs:68,2,4:9,1,60,F0F0F0F0,6
+!cs:68,2,5:10,1,60,FF000000,6
+
+## Power Stages
+#PS0 - All ON
+!cs:26,0,0:1,1
+!cs:26,0,1:2,1
+!cs:26,0,2:3,1
+#PS1 - Low power mode - not charging
+!cs:26,1,0:1,3
+#!cs:26,1,0:1,2
+!cs:26,1,1:2,2
+!cs:26,1,2:3,2
+#PS2 - Low power mode - charging
+!cs:26,2,0:1,3
+#!cs:26,2,0:1,2
+!cs:26,2,1:2,2
+!cs:26,2,2:3,2
+#PS3 - not used
+!cs:26,3,0:1,1
+!cs:26,3,1:2,1
+!cs:26,3,2:3,1
+#PS4 - not used
+!cs:26,4,0:1,1
+!cs:26,4,1:2,1
+!cs:26,4,2:3,1
+#Power Stage Transitions
+#3 hour wake
+!cs:27,0:1,0,1,7,10800,0,2
+# Alt on Wake > 13.5V
+!cs:27,1:1,0,1,2,1,13500,2
+#Motion Wake
+!cs:27,2:1,0,1,4,2,1,2
+#vibration
+#!cs:27,3:1,0,1,6,1,0,2
+!cs:27,3:1,0,1,6,0,0,2
+#Input 1 Set and clear
+!cs:27,4:1,0,1,10,0,3,2
+#Input 2 Set and clear
+!cs:27,5:1,0,1,11,0,3,2
+#Input 3 Set and Clear
+!cs:27,6:1,0,1,12,0,3,2
+#Input 4 Set and clear
+!cs:27,7:1,0,1,22,0,3,2
+#SMS - Ring Indicator
+!cs:27,8:1,0,1,19,0,0,2  
+#Wired ignition (input 0)
+!cs:27,9:1,0,1,39,0,1,2
+
+!cs:27,13:0,0,0,0,0,0,0
+!cs:27,14:0,0,0,0,0,0,0
+!cs:27,15:0,0,0,0,0,0,0
+!cs:27,16:0,0,0,0,0,0,0
+!cs:27,17:0,0,0,0,0,0,0
+!cs:27,18:0,0,0,0,0,0,0
+!cs:27,19:0,0,0,0,0,0,0
+
+#PS2 - PS0  Charging to wake
+#30 min wake
+!cs:27,20:2,0,1,7,1800,0,2
+# Alt off Wake < 13.3V
+!cs:27,21:2,0,1,3,1,13300,2
+#Motion Wake
+!cs:27,22:2,0,1,4,2,1,2
+#vibration
+#!cs:27,23:2,0,1,6,1,0,2
+!cs:27,23:2,0,1,6,0,0,2
+#Input 1 Set and clear
+!cs:27,24:2,0,1,10,0,3,2
+#Input 2 Set and clear
+!cs:27,25:2,0,1,11,0,3,2
+#Input 3 Set and Clear
+!cs:27,26:2,0,1,12,0,3,2
+#Input 4 Set and clear
+!cs:27,27:2,0,1,22,0,3,2
+#SMS - Ring Indicator
+!cs:27,28:2,0,1,19,0,0,2 
+#Wired ignition (input 0)
+!cs:27,29:2,0,1,39,0,3,2  
+
+!cs:27,30:0,0,0,0,0,0,0
+!cs:27,31:0,0,0,0,0,0,0
+!cs:27,32:0,0,0,0,0,0,0
+!cs:27,33:0,0,0,0,0,0,0
+!cs:27,34:0,0,0,0,0,0,0
+!cs:27,35:0,0,0,0,0,0,0
+!cs:27,36:0,0,0,0,0,0,0
+!cs:27,37:0,0,0,0,0,0,0
+!cs:27,38:0,0,0,0,0,0,0
+!cs:27,39:0,0,0,0,0,0,0
+
+#Manual User transitions to get called from script to start process
+!cs:27,40:0,1,1,20,0,1,2
+!cs:27,41:0,2,1,21,0,1,2
+!cs:27,42:0,0,0,0,0,0,0
+!cs:27,43:0,0,0,0,0,0,0
+!cs:27,44:0,0,0,0,0,0,0
+!cs:27,45:0,0,0,0,0,0,0
+!cs:27,46:0,0,0,0,0,0,0
+!cs:27,47:0,0,0,0,0,0,0
+
+#PIDS
+#Speed
+!cs:86,0:1,1000,1   
+#RPM
+!cs:86,1:1,1001,1  
+#Fuel Level
+!cs:86,2:1,1002,15	
+#MPG
+!cs:86,3:1,1003,5	
+#Odo
+!cs:86,4:1,1096,15	
+#Engine Run Time (s)
+!cs:86,5:1,1006,10	
+#EV Batt Remaining
+!cs:86,6:1,1024,15	
+#EV Batt Volt
+!cs:86,7:1,1025,15	
+#EV BSC
+!cs:86,8:1,1026,15	
+#EV Charge Stat
+!cs:86,9:1,1027,15	
+#Charger Type
+!cs:86,10:1,1028,15 
+#Charge state
+!cs:86,11:1,1029,15	 
+#Coolant temp  
+!cs:86,12:1,1004,30   
+#Throttle pos  
+!cs:86,22:1,1009,10		
+#Pedal Pos  
+!cs:86,23:1,100B,10		
+#Throttle pos  
+!cs:86,22:1,1009,10		
+#Pedal Pos  
+!cs:86,23:1,100B,10		
+#Lamp Stat 
+!cs:86,35:3,1021,0	
+#MIL Stat  
+!cs:86,36:3,1020,0	
+#DTC	
+!cs:86,37:3,1FFF,0
+
+#SMOG Endpoint
+#!cs:105,xirgosmogcollector.dev.smb.vzc-iot.com/api/v1/blob3,80,0,1
+#US-Test
+#!cs:105,xirgosmogcollector.test.us.smb.vzc-iot.com,80,0,1 
+#Staging
+#!cs:105,xirgosmogcollector.stage.us.smb.vzc-iot.com,80,0,1
+#US-PROD
+!cs:105,xirgosmogcollector.us.smb.vzc-iot.com,80,0,1
+
+#Force a reset to apply settings
+!csu

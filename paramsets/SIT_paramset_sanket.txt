@@ -1,0 +1,156 @@
+
+#Timer List
+#Timer(0):      Ignition On Timer
+#Timer(1):      Ignition Off Timer
+#Timer(2):      Idle Timer
+#Timer(3):      Movement Start Timer
+#Timer(4):      Movement Stop Timer
+#Timer(5):      Speedband Hysteresis Timer
+#Timer(6):      Script Heartbeat Timer
+#Timer(7):      Sleep Stage 1 Timer
+#Timer(8):      Sleep Stage 2 Timer
+#Timer(9):      Battery Disconnect Timer
+#Timer(10):     Battery Reconnect Timer
+#Timer(11):     Low Battery Threshold Timer
+#Timer(12):     Ignition Off One-shot (Park Time)
+#Timer(30):     Daily CheckIn Timer
+#Timer(31):     Heartbeat Timer
+
+#Packet List
+#Packet 00:     Generic Packet
+#Packet 01:     Geofence Crossing
+#Packet 02:     Accelerometer Alert
+#Packet 03:     Ignition-On Periodic Report with Maximum Speed Reporting
+#Packet 15:     Power-up/Reset/Wake-Up
+#Packet 127:    Device Diagnostics
+
+:wycfg prt 15
+
+:wycfg pdo 4
+
+:wycfg aet[0] 0 1 1 270        #Hard acceleration - Equiv. to 6mph/s
+:wycfg aet[1] 1 1 1 270        #Hard brake - Equiv. to 6mph/s
+:wycfg aet[2] 0 1 1 50         #Used to detect small acceleration for sleep recovery
+:wycfg cep 270 5 1			   #mg to match aet hard accel/brake configs value
+
+:wycfg apn[1] "m2m.com.attz"
+:wycfg apn[0] "xirgotech01.com.attz"
+:wycfg apn[2] "broadband"
+:wycfg apn[3] ""
+
+
+:wycfg dst[0] "96.233.15.144" 3010          #Main Server
+:wycfg dst[9] "20.62.251.213" 3100     #Device Manager     #Device Manager
+
+:wycfg gfn[0] 44863430 -93340770 500
+
+:wycfg ign 2        #OBD-Type Ignition
+######### TIMERS #####################
+:wycfg tmr[0] 60 0     # Ignition On   - 10 minutes
+:wycfg tmr[1] 300 1    # Ignition Off  - 5 min
+:wycfg tmr[2] 120 0     # Idle          - 5 minutes
+:wycfg tmr[3] 5 0       # Move Start    - 5 seconds
+:wycfg tmr[4] 30 0      # Move Stop     - 30 seconds
+:wycfg tmr[5] 10 0      # Speedbands    - 10 seconds
+:wycfg tmr[6] 2 1       # Script HB     - 1 second
+:wycfg tmr[7] 1000 1     # Sleep Stage 1 - 2 minutes
+:wycfg tmr[8] 1000 1     # Sleep Stage 2 - 5 minutes
+:wycfg tmr[9] 30 0      # Batt Disc.    - 30 seconds
+:wycfg tmr[10] 10 0     # Batt Rec.     - 10 seconds
+:wycfg tmr[11] 10 0     # Low Batt.     - 10 seconds
+:wycfg tmr[12] 600 1    # Ign Off 1-shot- 10 minutes
+:wycfg tmr[14] 2 0      # Input 1
+:wycfg tmr[15] 2 0      # Input 2
+:wycfg tmr[16] 2 0      # Input 3
+:wycfg tmr[30] 86400 1  # Daily Checkin - 24 hours
+:wycfg tmr[31] 180 0   # Heartbeat     - 30 minutes
+
+
+
+######### PACKET RECIPES #############
+
+# Generic Alerts
+# <UID><PID><RSN><DT><LT><LN><AL><SP><HD><RP><SV><HP><MI><BV><CQ><SS><SEQ>
+:wycfg pcr[0] 0011010304060708090b0a5813122e17145205
+
+# Geofence Crossing Alerts
+# <UID><PID><RSN><GFN><DT><LT><LN><AL><SP><HD><SV><HP><MI><BV><CQ><SS><SEQ>
+:wycfg pcr[1] 011101030441060708090b0a13122e17145205
+
+# Accelerometer Alerts
+# <UID><PID><RSN><SDT><SLT><SLN><SSP><SHD><MA><AED><EDT><ELT><ELN><ESP><EHD><RP><SV><HP><MI><BV><CQ><SS><SEQ>
+:wycfg pcr[2] 0217010304191a1b1c1d1e1f20212223245813122e17145205
+
+# Ignition On Periodic Report with Maximum Speed Reporting
+# <UID><PID><RSN><MDT><MLT><MLN><MSP><RP><SV><HP><MI><BV><CQ><SS><SEQ>
+:wycfg pcr[3] 030f0103044a4b4c445813122e17145205
+
+# Power-up/Reset/Wake-up Alert
+# <UID><PID><RSN><DT><LT><LN><AL><SP><HD><SV><HP><MI><BV><CQ><WRN><BS><SS><SEQ>
+:wycfg pcr[15] 0f12010304060708090b0a13122e171453695205
+
+# Device Diagnostic Alert
+# <UID><PID><RSN><DT><SV><HP><CQ><CI><APN><BV><IBV><SS><BS><LO><VIN><SEQ>
+:wycfg pcr[127] 7f1001030406131214156a17165253186505
+
+# Driver ID Alert
+# <UID><PID><RSN><DT><SV><HP><CQ><CI><APN><BV><IBV><SS><BS><LO><VIN><SEQ><DID>
+:wycfg pcr[8] 081101030406131214156a171652531865050e
+
+# GPIO pin state change Alert
+:wycfg pcr[9] 0906010304050C0D
+
+# Accel / Decel threshold exceeded Alert
+:wycfg pcr[10] 0a050103040570
+
+# Packet Field Definitions
+# <UID> = Unit ID Number
+# <PID> = Packet ID Number
+# <RSN> = Reason Code
+# <DT>  = Date/Time (Seconds since Unix Epoch)
+# <LT>  = GPS Latitude
+# <LN>  = GPS Longitude
+# <AL>  = GPS Altitude
+# <SP>  = GPS Speed
+# <HD>  = GPS Heading
+# <RP>  = Vehicle RPM
+# <SV>  = GPS Satellites in View
+# <HP>  = GPS Horizontal Dilution of Precision
+# <MI>  = 
+# <BV>  = Vehicle Battery Voltage
+# <CQ>  = Cellular Signal Quality
+# <SS>  = System States Bitfield
+# <SEQ> = Packet Sequence Number
+#
+# <GFN> = Geofence Index Number
+# 
+# <SDT> = Accelerometer Event Start Date/Time
+# <SLT> = Accelerometer Event Start Latitude
+# <SLN> = Accelerometer Event Start Longitude
+# <SSP> = Accelerometer Event Start Speed
+# <SHD> = Accelerometer Event Start Heading
+# <MA>  = Max Acceleration During Event
+# <AED> = Accelerometer Event Duration
+# <EDT> = Accelerometer Event End Date/Time
+# <ELT> = Accelerometer Event End Latitude
+# <ELN> = Accelerometer Event End Longitude
+# <ESP> = Accelerometer Event End Speed
+# <EHD> = Accelerometer Event End Heading
+#
+# <MDT> = Max. Speed Seconds Since Unix Epoch
+# <MLT> = Max. Speed Latitude
+# <MLN> = Max. Speed Longitude
+# <MSP> = Max. Speed
+#
+# <WRN> = Wake Reason
+# <BS>  = Boot Status
+#
+# <APN> = Access Point Name
+# <IBV> = Device Internal Battery Voltage
+# <SS>  = System Status
+# <BS>  = Boot Status
+# <LO>  = Device Lifetime Odometer
+# <VIN> = Vehicle Identification Number
+# <FW>  = Device Firmware Version
+#
+# <DID>  = Driver ID
